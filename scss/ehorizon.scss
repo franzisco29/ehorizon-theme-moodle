@@ -1,164 +1,74 @@
-/*
- * E-Horizon Learning visual system.
- * A custom palette inspired by a technical racing environment; it does not
- * reproduce E-Horizon branding, logos or protected media.
- */
+/* E-Horizon Learning — Boost visual layer. */
+:root { --eh-navy:#071522; --eh-panel:#10263d; --eh-cloud:#f5f8fc; --eh-white:#fff; --eh-text:#10253b; --eh-muted:#5f7286; --eh-cyan:#18b8ed; --eh-cyan-dark:#087aa5; --eh-orange:#ff542e; --eh-line:#dbe5ee; --eh-radius:12px; }
+body { color:var(--eh-text); background:var(--eh-navy); font-family:Inter,"Helvetica Neue",Arial,sans-serif; }
+#page-wrapper,#page { background:radial-gradient(circle at 92% 4%,rgba(24,184,237,.13),transparent 26rem),var(--eh-navy); }
+#page { margin-top:4rem; }
+.navbar.fixed-top { min-height:4rem; background:rgba(5,17,29,.97)!important; border-bottom:1px solid rgba(150,210,234,.18); box-shadow:none; }
+.navbar .navbar-brand,.navbar .nav-link,.usermenu .login a,.usermenu .dropdown-toggle { color:#f4fbff!important; }
+.navbar .nav-link:hover,.navbar .nav-link:focus,.moremenu .nav-link.active { color:var(--eh-cyan)!important; }
+.moremenu .nav-link.active { border-bottom:3px solid var(--eh-orange)!important; }
 
-:root {
-    --eh-ink: #09101d;
-    --eh-panel: #121c2b;
-    --eh-panel-raised: #18263a;
-    --eh-line: rgba(207, 222, 240, .16);
-    --eh-text: #f4f7fb;
-    --eh-muted: #a9b7c9;
-    --eh-accent: #ff4d28;
-    --eh-accent-deep: #d9391a;
-    --eh-electric: #67e8f9;
-    --eh-success: #7ce5a1;
-    --eh-radius: 14px;
-    --eh-shadow: 0 18px 45px rgba(0, 0, 0, .25);
-}
+/* A dark shell; the learning work area is deliberately light. */
+#page.drawers,#page.drawers .main-inner,#region-main,.pagelayout-mydashboard #region-main { background:var(--eh-cloud); }
+#page.drawers .main-inner { max-width:1320px; margin:0 auto; padding:1.5rem; border-radius:0; }
+@media (min-width:992px) { #page.drawers .main-inner { margin-top:1.5rem; margin-bottom:2.5rem; border-radius:16px; box-shadow:0 18px 42px rgba(0,0,0,.22); } }
 
-body {
-    background:
-        radial-gradient(circle at 88% -10%, rgba(103, 232, 249, .12), transparent 31rem),
-        linear-gradient(135deg, #0b1422, var(--eh-ink) 45%, #10192a);
-    color: var(--eh-text);
-    font-family: Inter, "Helvetica Neue", Arial, sans-serif;
-}
+/* Page title: actual E-Horizon RC car photography, with an accessible overlay. */
+#page-header { position:relative; overflow:hidden; min-height:124px; margin:0 0 1rem; padding:2rem 2.5rem; color:#fff; background:linear-gradient(100deg,rgba(7,21,34,.94),rgba(16,38,61,.84)),url([[pix:theme|hero-car]]) center 57% / cover; border:0; border-radius:var(--eh-radius); box-shadow:none; }
+#page-header::after { position:absolute; top:-70px; right:12%; width:200px; height:300px; border-left:12px solid rgba(24,184,237,.45); transform:skewX(-20deg); content:''; }
+#page-header .page-context-header,#page-header .header-actions-container { position:relative; z-index:1; }
+#page-header h1,#page-header .h1,#page-header .page-header-headings { color:#fff; text-shadow:none; }
+#page-header .breadcrumb-item,#page-header .breadcrumb-item a { color:rgba(255,255,255,.78); }
+#page-header .breadcrumb-item + .breadcrumb-item::before { color:var(--eh-cyan); }
+.pagelayout-mydashboard #page-header,.pagelayout-frontpage #page-header { min-height:174px; display:flex; align-items:end; }
 
-a { color: var(--eh-electric); }
-a:hover, a:focus { color: #b5f4fd; }
+.secondary-navigation,.tertiary-navigation,.moremenu,.nav-tabs { background:var(--eh-white); border-color:var(--eh-line); }
+.secondary-navigation .navigation .nav-link,.nav-tabs .nav-link { color:var(--eh-text); }
+.secondary-navigation .navigation .nav-link.active,.nav-tabs .nav-link.active { color:var(--eh-cyan-dark); border-bottom-color:var(--eh-orange); }
 
-#page, #page-content, .course-content, .drawer, .drawercontent,
-.list-group-item, .card, .card-body, .popover, .dropdown-menu,
-.moremenu .nav-link, .secondary-navigation .navigation { background-color: transparent; }
+/* Cards, blocks and course overview. */
+.card,.block,.activity-item,.courseindex-item,.dropdown-menu,.popover,.modal-content,.message-app,.userselector { color:var(--eh-text); background:var(--eh-white); border:1px solid var(--eh-line); box-shadow:none; }
+.card,.block,.activity-item { border-radius:var(--eh-radius); }
+.block { margin-bottom:1rem; }
+.block .card-body,.card-body { color:var(--eh-text); }
+.card-title,.block .card-title,h1,h2,h3,h4,h5,h6 { color:var(--eh-text); }
+.text-muted,.description,.activity-information { color:var(--eh-muted)!important; }
+.block_myoverview,[data-region="myoverview"] { border:0; background:transparent; }
+.block_myoverview .card,[data-region="myoverview"] .card.dashboard-card { overflow:hidden; border-radius:10px; transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease; }
+.block_myoverview .card:hover,[data-region="myoverview"] .card.dashboard-card:hover { border-color:rgba(24,184,237,.65); box-shadow:0 12px 24px rgba(16,37,59,.13); transform:translateY(-2px); }
+.block_myoverview .card .card-img-top,[data-region="myoverview"] .card .card-img-top { min-height:118px; background:url([[pix:theme|team-celebration]]) center / cover; }
 
-.navbar.fixed-top {
-    min-height: 4.5rem;
-    background: rgba(9, 16, 29, .91) !important;
-    border-bottom: 1px solid var(--eh-line);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, .16);
-    backdrop-filter: blur(18px);
-}
+/* Course content: a clean technical checklist, never a dark slab. */
+.course-content .section,.course-content .section .activity-item { background:var(--eh-white); }
+.activity-item { margin:.6rem 0; padding:.9rem 1rem; }
+.activity-item:hover { border-color:rgba(24,184,237,.7); background:#f7fdff; }
+.activityname a,.aalink,.activitytitle a { color:var(--eh-text); font-weight:700; }
+.activityname a:hover,.aalink:hover,.activitytitle a:hover { color:var(--eh-cyan-dark); }
 
-.navbar .navbar-brand, .navbar .nav-link, .usermenu .login a { color: var(--eh-text) !important; }
-.navbar .nav-link:hover, .navbar .nav-link:focus,
-.moremenu .nav-link.active { color: var(--eh-electric) !important; }
-.moremenu .nav-link.active { border-bottom-color: var(--eh-accent) !important; }
+/* Drawers are navigation-only and remain dark. */
+.drawer { color:#d9e7f1; background:var(--eh-navy)!important; border-color:rgba(150,210,234,.18)!important; }
+.drawer .list-group-item,.drawer .list-group-item-action,.drawer .courseindex-section-title,.drawer .courseindex-item { color:#d9e7f1; background:transparent; border-color:rgba(150,210,234,.12); }
+.drawer .list-group-item-action:hover,.drawer .list-group-item-action:focus,.drawer .list-group-item.active,.drawer .courseindex-item.pageitem:hover { color:#fff; background:rgba(24,184,237,.13); }
 
-#page-wrapper { min-height: 100vh; }
-#page { margin-top: 4.5rem; }
-
-#page-header {
-    position: relative;
-    overflow: hidden;
-    padding: 2.25rem 2.5rem;
-    color: var(--eh-text);
-    background: linear-gradient(115deg, rgba(24, 38, 58, .96), rgba(18, 28, 43, .84));
-    border: 1px solid var(--eh-line);
-    border-radius: var(--eh-radius);
-    box-shadow: var(--eh-shadow);
-}
-
-#page-header::after {
-    position: absolute;
-    right: -4rem;
-    bottom: -5rem;
-    width: 20rem;
-    height: 20rem;
-    border: 2rem solid rgba(255, 77, 40, .16);
-    border-radius: 50%;
-    content: '';
-}
-
-#page-header .page-context-header { position: relative; z-index: 1; }
-.breadcrumb { background: transparent; }
-.breadcrumb-item, .breadcrumb-item a { color: var(--eh-muted); }
-.breadcrumb-item + .breadcrumb-item::before { color: var(--eh-accent); }
-
-.btn {
-    border-radius: 999px;
-    font-weight: 700;
-    letter-spacing: .025em;
-    transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
-}
-.btn:hover { transform: translateY(-1px); }
-.btn-primary, .btn-primary:not(:disabled):not(.disabled):active {
-    color: #fff;
-    background: var(--eh-accent);
-    border-color: var(--eh-accent);
-    box-shadow: 0 8px 22px rgba(255, 77, 40, .28);
-}
-.btn-primary:hover, .btn-primary:focus { background: var(--eh-accent-deep); border-color: var(--eh-accent-deep); }
-.btn-secondary, .btn-outline-secondary {
-    color: var(--eh-text);
-    border-color: rgba(244, 247, 251, .35);
-    background: rgba(244, 247, 251, .06);
-}
-
-.card, .block, .activity-item, .courseindex-item, .courseindex-section,
-.dropdown-menu, .popover, .modal-content, .form-control, .custom-select {
-    color: var(--eh-text);
-    background: rgba(24, 38, 58, .76);
-    border-color: var(--eh-line);
-}
-.card, .block, .activity-item { border-radius: var(--eh-radius); box-shadow: 0 10px 28px rgba(0, 0, 0, .14); }
-.card:hover { border-color: rgba(103, 232, 249, .45); }
-.card-title, .block .card-title, h1, h2, h3, h4, h5, h6 { color: var(--eh-text); }
-.text-muted, .description, .activity-information { color: var(--eh-muted) !important; }
-
-.drawer {
-    background: #0e1726 !important;
-    border-color: var(--eh-line) !important;
-    color: var(--eh-text);
-}
-.drawer .list-group-item, .drawer .list-group-item-action { color: var(--eh-muted); border-color: var(--eh-line); }
-.drawer .list-group-item-action:hover, .drawer .list-group-item-action:focus,
-.drawer .list-group-item.active { color: var(--eh-text); background: rgba(255, 77, 40, .14); }
-
-.courseindex .courseindex-section-title, .courseindex .courseindex-item { color: var(--eh-text); }
-.courseindex .courseindex-item.pageitem { border-radius: 8px; }
-.courseindex .courseindex-item.pageitem:hover { background: rgba(103, 232, 249, .08); }
-
-.activity-item { margin-bottom: .75rem; padding: .9rem 1rem; }
-.activity-item:hover { background: rgba(103, 232, 249, .055); border-color: rgba(103, 232, 249, .35); }
-.activityname a, .aalink, .activitytitle a { color: var(--eh-text); font-weight: 700; }
-.activityname a:hover, .aalink:hover, .activitytitle a:hover { color: var(--eh-electric); }
-
-.badge { border-radius: 999px; padding: .42em .72em; }
-.badge-primary, .bg-primary { background-color: var(--eh-accent) !important; }
-.badge-success, .bg-success { background-color: #287d50 !important; }
-.progress { height: .6rem; background-color: rgba(244, 247, 251, .12); border-radius: 99px; }
-.progress-bar { background: linear-gradient(90deg, var(--eh-accent), #ff956c); }
-
-.form-control, .custom-select, .form-control:focus, .custom-select:focus {
-    color: var(--eh-text);
-    background-color: rgba(9, 16, 29, .58);
-    border-color: rgba(103, 232, 249, .46);
-}
-.form-control:focus { box-shadow: 0 0 0 .2rem rgba(103, 232, 249, .16); }
-.form-control::placeholder { color: #8291a5; }
-
-.alert { border-radius: 10px; }
-.alert-info { color: #d9fbff; background: rgba(11, 112, 132, .30); border-color: rgba(103, 232, 249, .3); }
-.alert-warning { color: #fff1ca; background: rgba(148, 93, 4, .28); border-color: rgba(255, 198, 82, .28); }
-
-#page-footer {
-    margin-top: 4rem;
-    color: var(--eh-muted);
-    background: #070d17;
-    border-top: 1px solid var(--eh-line);
-}
-#page-footer a { color: var(--eh-electric); }
-
-/* Keyboard visibility is intentionally strong for classrooms and accessibility. */
-a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
-    outline: 3px solid var(--eh-electric) !important;
-    outline-offset: 3px;
-}
-
-@media (max-width: 767.98px) {
-    #page-header { padding: 1.5rem 1.25rem; border-radius: 10px; }
-    .activity-item { padding: .75rem; }
-}
+/* Controls must remain legible on a white workspace. */
+.btn { border-radius:999px; font-weight:700; letter-spacing:.01em; }
+.btn-primary,.btn-primary:not(:disabled):not(.disabled):active { color:#fff; background:var(--eh-orange); border-color:var(--eh-orange); box-shadow:0 6px 14px rgba(255,84,46,.22); }
+.btn-primary:hover,.btn-primary:focus { background:#dc3e1e; border-color:#dc3e1e; }
+.btn-secondary,.btn-outline-secondary { color:var(--eh-text); background:#fff; border-color:#9eb1c3; }
+.btn-outline-primary { color:var(--eh-cyan-dark); border-color:var(--eh-cyan-dark); }
+.btn-outline-primary:hover { background:var(--eh-cyan-dark); border-color:var(--eh-cyan-dark); }
+.form-control,.custom-select,.form-control:focus,.custom-select:focus { color:var(--eh-text); background-color:#fff; border-color:#9eb1c3; }
+.form-control:focus { border-color:var(--eh-cyan); box-shadow:0 0 0 .2rem rgba(24,184,237,.18); }
+.form-control::placeholder { color:#708398; }
+.badge { border-radius:999px; padding:.42em .72em; }
+.badge-primary,.bg-primary { background-color:var(--eh-cyan-dark)!important; }
+.badge-success,.bg-success { background-color:#208d64!important; }
+.progress { height:.6rem; background-color:#dce6ef; border-radius:999px; }
+.progress-bar { background:linear-gradient(90deg,var(--eh-cyan),#58d5f5); }
+.alert { border-radius:10px; }
+.alert-info { color:#075b78; background:#e8faff; border-color:#a6eafa; }
+.alert-warning { color:#744006; background:#fff6de; border-color:#ffe09a; }
+#page-footer { color:#b9c8d4; background:#06111d; border-top:1px solid rgba(150,210,234,.18); }
+#page-footer a { color:var(--eh-cyan); }
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible { outline:3px solid var(--eh-cyan)!important; outline-offset:3px; }
+@media (max-width:767.98px) { #page.drawers .main-inner { padding:1rem; } #page-header { min-height:142px; padding:1.5rem; } #page-header::after { right:4%; } }

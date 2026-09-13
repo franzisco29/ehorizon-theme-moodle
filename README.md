@@ -1,9 +1,9 @@
 # E-Horizon Learning theme for Moodle
 
-A Moodle 4.5+ child theme based on Boost. It translates the **energy and editorial
-logic** of E-Horizon (dark technical surfaces, cyan data accents, warm racing-orange
-actions, rounded panels) into an accessible learning interface. It contains no
-E-Horizon logo, photography or other proprietary media.
+A Moodle 4.5+ child theme based on Boost. It translates E-Horizon into an accessible
+learning interface: a dark navigation shell, a bright work area, E-Horizon cyan for
+navigation and race orange for primary actions. The `pix/` folder contains supplied
+E-Horizon photographs, credited to Marco Mazzon (Rossomotori.it), for use by this theme.
 
 ## Install
 
@@ -20,9 +20,11 @@ third-party activity plugins with bespoke markup.
 
 ## Design decisions
 
-- The saturated orange is reserved for primary actions and progress.
-- Cyan denotes navigation, links and focus; it is not the sole carrier of meaning.
-- Contrast and keyboard focus are deliberately prominent for classroom use.
+- Dark blue belongs to navigation; the workspace is intentionally light to keep Moodle
+  forms, course content and administration readable.
+- Orange is reserved for primary actions, cyan for navigation and focus; colour is not
+  the sole carrier of meaning.
+- A track image adds energy to page headers while course cards use team photography.
 - Core layouts, drawers, navigation and course index remain supplied by Boost, which
   preserves Moodle's established responsive behaviour.
 
