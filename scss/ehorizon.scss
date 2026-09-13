@@ -72,3 +72,46 @@ body { color:var(--eh-text); background:var(--eh-navy); font-family:Inter,"Helve
 #page-footer a { color:var(--eh-cyan); }
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible { outline:3px solid var(--eh-cyan)!important; outline-offset:3px; }
 @media (max-width:767.98px) { #page.drawers .main-inner { padding:1rem; } #page-header { min-height:142px; padding:1.5rem; } #page-header::after { right:4%; } }
+
+/* Dark application mode: the work area is dark too, but never low-contrast. */
+#page.drawers,#page.drawers .main-inner,#region-main,.pagelayout-mydashboard #region-main { background:#091827; }
+#page.drawers .main-inner { border:1px solid rgba(115,177,207,.16); }
+.secondary-navigation,.tertiary-navigation,.moremenu,.nav-tabs { background:#102338; border-color:#28445a; }
+.secondary-navigation .navigation .nav-link,.nav-tabs .nav-link { color:#dcebf5; }
+.secondary-navigation .navigation .nav-link.active,.nav-tabs .nav-link.active { color:var(--eh-cyan); }
+.card,.block,.activity-item,.courseindex-item,.dropdown-menu,.popover,.modal-content,.message-app,.userselector,
+.course-content .section,.course-content .section .activity-item { color:#eaf4fb; background:#102338; border-color:#29475e; }
+.block .card-body,.card-body,.card-title,.block .card-title,h1,h2,h3,h4,h5,h6 { color:#f7fbff; }
+.text-muted,.description,.activity-information { color:#a9c0d0!important; }
+.activity-item:hover { background:#132e46; border-color:rgba(24,184,237,.7); }
+.activityname a,.aalink,.activitytitle a { color:#f3f9fd; }
+.activityname a:hover,.aalink:hover,.activitytitle a:hover { color:var(--eh-cyan); }
+.btn-secondary,.btn-outline-secondary { color:#eef8ff; background:#142c43; border-color:#5c7890; }
+.form-control,.custom-select,.form-control:focus,.custom-select:focus { color:#eef8ff; background-color:#0b1d2e; border-color:#476781; }
+.form-control::placeholder { color:#9bb2c2; }
+.progress { background:#284154; }
+.alert-info { color:#c8f4ff; background:#0c3446; border-color:#18799b; }
+.alert-warning { color:#ffe6aa; background:#4d3511; border-color:#9d741f; }
+
+/* Login: celebrate the winning team, with a sober dark credential panel. */
+body.pagelayout-login,#page-login-index { background:#061522; }
+body.pagelayout-login #page,body.pagelayout-login #page-wrapper { background:#061522; }
+body.pagelayout-login #page .login-layout-left {
+    position:relative;
+    background-image:linear-gradient(90deg,rgba(4,16,27,.44),rgba(4,16,27,.68)),url([[pix:theme|team-celebration]])!important;
+    background-position:center!important;
+    background-size:cover!important;
+}
+body.pagelayout-login #page .login-layout-left::after { content:none!important; }
+body.pagelayout-login #page .login-layout-right { color:#eaf4fb; background:#0b1c2d!important; }
+body.pagelayout-login #page .login-container { color:#eaf4fb; background:transparent!important; box-shadow:none!important; }
+body.pagelayout-login #page .login-container h1,body.pagelayout-login #page .login-container h2,
+body.pagelayout-login #page .login-container h3,body.pagelayout-login #page .login-container label { color:#f8fcff!important; }
+body.pagelayout-login #page .login-container .form-control { color:#f8fcff; background:#102a40; border-color:#4c7490; }
+body.pagelayout-login #page .login-container .form-control:focus { border-color:var(--eh-cyan); }
+body.pagelayout-login #page .login-container a { color:var(--eh-cyan); }
+body.pagelayout-login #page .login-container .btn-primary { color:#fff; background:var(--eh-orange); border-color:var(--eh-orange); }
+body.pagelayout-login #page .login-container hr,body.pagelayout-login #page .login-container .separator { border-color:#35546c; }
+/* Moodle's Italian language pack currently exposes this label as “Username”. */
+body.pagelayout-login label[for="username"] { font-size:0; }
+body.pagelayout-login label[for="username"]::after { color:#f8fcff; content:"Nome utente o email"; font-size:1rem; }
