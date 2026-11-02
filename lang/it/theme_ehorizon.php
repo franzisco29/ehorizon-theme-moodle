@@ -4,7 +4,7 @@
 $string['pluginname'] = 'E-Horizon Learning';
 $string['choosereadme'] = 'Tema Moodle scuro e ad alto contrasto, ispirato a STEM, motorsport e cultura maker.';
 $string['privacy:metadata'] = 'Il tema E-Horizon Learning non memorizza dati personali.';
-$string['loginpanel_eyebrow'] = 'E-Horizon Learning';
+$string['loginpanel_eyebrow'] = 'E-Horizon Lab';
 $string['loginpanel_title'] = 'Progetta. Costruisci. <span>Gareggia.</span>';
 $string['loginpanel_lead'] = 'Il campus online dei team E-Horizon: corsi, materiali tecnici e risorse per ideare la tua auto e portarla in pista.';
 $string['loginpanel_step1'] = 'Progetta';

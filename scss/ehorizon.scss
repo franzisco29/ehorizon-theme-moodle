@@ -150,15 +150,13 @@ hr { border-color: var(--eh-line); opacity: 1; }
 .secondary-navigation .nav-tabs,
 .tertiary-navigation,
 .tertiary-navigation .navitem,
-.moremenu,
-.nav-tabs {
+#page .nav-tabs {
     background: var(--eh-panel) !important;
     border-color: var(--eh-line);
 }
 .secondary-navigation { border-radius: var(--eh-radius); margin-bottom: 1rem; }
 .secondary-navigation .nav-link,
 .secondary-navigation .navigation .nav-link,
-.moremenu .nav-link,
 .nav-tabs .nav-link,
 .nav-tabs .nav-link:not(.active) { color: #dcebf5 !important; opacity: 1; }
 .secondary-navigation .nav-link:hover,
@@ -171,6 +169,21 @@ hr { border-color: var(--eh-line); opacity: 1; }
     border-color: transparent transparent var(--eh-orange);
     border-bottom: 3px solid var(--eh-orange) !important;
 }
+
+/* Primary navigation lives inside the navbar: one single colour, no inner box. */
+.navbar .primary-navigation,
+.navbar .primary-navigation .navigation,
+.navbar .moremenu,
+.navbar .moremenu .nav-tabs,
+.navbar .nav-tabs,
+.primary-navigation .nav-tabs {
+    background: transparent !important;
+    border-color: transparent;
+}
+.navbar .moremenu .nav-link { color: #f4fbff !important; background: transparent !important; }
+.navbar .moremenu .nav-link:hover,
+.navbar .moremenu .nav-link:focus { color: var(--eh-cyan) !important; background: rgba(24, 184, 237, .10) !important; }
+.navbar .moremenu .nav-link.active { color: var(--eh-cyan) !important; background: transparent !important; border-bottom: 3px solid var(--eh-orange) !important; }
 
 /* 5 · Surfaces ------------------------------------------------------------ */
 .card, .block, .activity-item, .courseindex-item, .dropdown-menu, .popover, .modal-content,
@@ -414,6 +427,13 @@ body.pagelayout-login #page .login-container .toggle-sensitive-btn {
     --bs-btn-active-bg: #17405c;
     border-color: #4c7490;
 }
+/* Username and password fields share the same full width. */
+body.pagelayout-login #page .login-container .login-form .login-input-wrapper,
+body.pagelayout-login #page .login-container .login-form .input-group,
+body.pagelayout-login #page .login-container .login-form .form-control { display: block; width: 100%; }
+body.pagelayout-login #page .login-container .login-form .input-group { display: flex; }
+body.pagelayout-login #page .login-container .login-form .input-group .form-control { flex: 1 1 auto; width: 1%; }
+body.pagelayout-login #page .login-container .login-form input#username { width: 100%; max-width: 100%; }
 /* Browser autofill paints inputs pale blue; keep them on-palette. */
 body.pagelayout-login input:-webkit-autofill,
 body.pagelayout-login input:-webkit-autofill:hover,
