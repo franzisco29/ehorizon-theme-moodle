@@ -1,117 +1,434 @@
-/* E-Horizon Learning — Boost visual layer. */
-:root { --eh-navy:#071522; --eh-panel:#10263d; --eh-cloud:#f5f8fc; --eh-white:#fff; --eh-text:#10253b; --eh-muted:#5f7286; --eh-cyan:#18b8ed; --eh-cyan-dark:#087aa5; --eh-orange:#ff542e; --eh-line:#dbe5ee; --eh-radius:12px; }
-body { color:var(--eh-text); background:var(--eh-navy); font-family:Inter,"Helvetica Neue",Arial,sans-serif; }
-#page-wrapper,#page { background:radial-gradient(circle at 92% 4%,rgba(24,184,237,.13),transparent 26rem),var(--eh-navy); }
-#page { margin-top:4rem; }
-.navbar.fixed-top { min-height:4rem; background:rgba(5,17,29,.97)!important; border-bottom:1px solid rgba(150,210,234,.18); box-shadow:none; }
-.navbar .navbar-brand,.navbar .nav-link,.usermenu .login a,.usermenu .dropdown-toggle { color:#f4fbff!important; }
-.navbar .nav-link:hover,.navbar .nav-link:focus,.moremenu .nav-link.active { color:var(--eh-cyan)!important; }
-.moremenu .nav-link.active { border-bottom:3px solid var(--eh-orange)!important; }
+/* ==========================================================================
+   E-Horizon Learning — visual layer on top of Boost.
+   Dark-only. Sections: 1 tokens · 2 shell · 3 header · 4 navigation ·
+   5 surfaces · 6 course lists · 7 forms/buttons · 8 menus · 9 drawers/footer ·
+   10 login.
+   ========================================================================== */
 
-/* A dark shell; the learning work area is deliberately light. */
-#page.drawers,#page.drawers .main-inner,#region-main,.pagelayout-mydashboard #region-main { background:var(--eh-cloud); }
-#page.drawers .main-inner { max-width:1320px; margin:0 auto; padding:1.5rem; border-radius:0; }
-@media (min-width:992px) { #page.drawers .main-inner { margin-top:1.5rem; margin-bottom:2.5rem; border-radius:16px; box-shadow:0 18px 42px rgba(0,0,0,.22); } }
+/* 1 · Tokens ---------------------------------------------------------------
+   Re-pointing Bootstrap 5.3's CSS variables makes every Moodle component that
+   reads them (tables, list groups, dropdowns, breadcrumbs, admin pages…)
+   follow the E-Horizon palette without per-component hacks. */
+:root {
+    --eh-navy: #071522;
+    --eh-work: #091827;
+    --eh-panel: #102338;
+    --eh-panel-2: #132e46;
+    --eh-line: #29475e;
+    --eh-text: #eaf4fb;
+    --eh-muted: #a9c0d0;
+    --eh-cyan: #18b8ed;
+    --eh-cyan-soft: #6fd6f5;
+    --eh-cyan-dark: #087aa5;
+    --eh-orange: #ff542e;
+    --eh-orange-dark: #dc3e1e;
+    --eh-radius: 12px;
 
-/* Page title: actual E-Horizon RC car photography, with an accessible overlay. */
-#page-header { position:relative; overflow:hidden; min-height:124px; margin:0 0 1rem; padding:2rem 2.5rem; color:#fff; background:linear-gradient(100deg,rgba(7,21,34,.94),rgba(16,38,61,.84)),url([[pix:theme|hero-car]]) center 57% / cover; border:0; border-radius:var(--eh-radius); box-shadow:none; }
-#page-header::after { position:absolute; top:-70px; right:12%; width:200px; height:300px; border-left:12px solid rgba(24,184,237,.45); transform:skewX(-20deg); content:''; }
-#page-header .page-context-header,#page-header .header-actions-container { position:relative; z-index:1; }
-#page-header h1,#page-header .h1,#page-header .page-header-headings { color:#fff; text-shadow:none; }
-#page-header .breadcrumb-item,#page-header .breadcrumb-item a { color:rgba(255,255,255,.78); }
-#page-header .breadcrumb-item + .breadcrumb-item::before { color:var(--eh-cyan); }
-.pagelayout-mydashboard #page-header,.pagelayout-frontpage #page-header { min-height:174px; display:flex; align-items:end; }
-
-.secondary-navigation,.tertiary-navigation,.moremenu,.nav-tabs { background:var(--eh-white); border-color:var(--eh-line); }
-.secondary-navigation .navigation .nav-link,.nav-tabs .nav-link { color:var(--eh-text); }
-.secondary-navigation .navigation .nav-link.active,.nav-tabs .nav-link.active { color:var(--eh-cyan-dark); border-bottom-color:var(--eh-orange); }
-
-/* Cards, blocks and course overview. */
-.card,.block,.activity-item,.courseindex-item,.dropdown-menu,.popover,.modal-content,.message-app,.userselector { color:var(--eh-text); background:var(--eh-white); border:1px solid var(--eh-line); box-shadow:none; }
-.card,.block,.activity-item { border-radius:var(--eh-radius); }
-.block { margin-bottom:1rem; }
-.block .card-body,.card-body { color:var(--eh-text); }
-.card-title,.block .card-title,h1,h2,h3,h4,h5,h6 { color:var(--eh-text); }
-.text-muted,.description,.activity-information { color:var(--eh-muted)!important; }
-.block_myoverview,[data-region="myoverview"] { border:0; background:transparent; }
-.block_myoverview .card,[data-region="myoverview"] .card.dashboard-card { overflow:hidden; border-radius:10px; transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease; }
-.block_myoverview .card:hover,[data-region="myoverview"] .card.dashboard-card:hover { border-color:rgba(24,184,237,.65); box-shadow:0 12px 24px rgba(16,37,59,.13); transform:translateY(-2px); }
-.block_myoverview .card .card-img-top,[data-region="myoverview"] .card .card-img-top { min-height:118px; background:url([[pix:theme|team-celebration]]) center / cover; }
-
-/* Course content: a clean technical checklist, never a dark slab. */
-.course-content .section,.course-content .section .activity-item { background:var(--eh-white); }
-.activity-item { margin:.6rem 0; padding:.9rem 1rem; }
-.activity-item:hover { border-color:rgba(24,184,237,.7); background:#f7fdff; }
-.activityname a,.aalink,.activitytitle a { color:var(--eh-text); font-weight:700; }
-.activityname a:hover,.aalink:hover,.activitytitle a:hover { color:var(--eh-cyan-dark); }
-
-/* Drawers are navigation-only and remain dark. */
-.drawer { color:#d9e7f1; background:var(--eh-navy)!important; border-color:rgba(150,210,234,.18)!important; }
-.drawer .list-group-item,.drawer .list-group-item-action,.drawer .courseindex-section-title,.drawer .courseindex-item { color:#d9e7f1; background:transparent; border-color:rgba(150,210,234,.12); }
-.drawer .list-group-item-action:hover,.drawer .list-group-item-action:focus,.drawer .list-group-item.active,.drawer .courseindex-item.pageitem:hover { color:#fff; background:rgba(24,184,237,.13); }
-
-/* Controls must remain legible on a white workspace. */
-.btn { border-radius:999px; font-weight:700; letter-spacing:.01em; }
-.btn-primary,.btn-primary:not(:disabled):not(.disabled):active { color:#fff; background:var(--eh-orange); border-color:var(--eh-orange); box-shadow:0 6px 14px rgba(255,84,46,.22); }
-.btn-primary:hover,.btn-primary:focus { background:#dc3e1e; border-color:#dc3e1e; }
-.btn-secondary,.btn-outline-secondary { color:var(--eh-text); background:#fff; border-color:#9eb1c3; }
-.btn-outline-primary { color:var(--eh-cyan-dark); border-color:var(--eh-cyan-dark); }
-.btn-outline-primary:hover { background:var(--eh-cyan-dark); border-color:var(--eh-cyan-dark); }
-.form-control,.custom-select,.form-control:focus,.custom-select:focus { color:var(--eh-text); background-color:#fff; border-color:#9eb1c3; }
-.form-control:focus { border-color:var(--eh-cyan); box-shadow:0 0 0 .2rem rgba(24,184,237,.18); }
-.form-control::placeholder { color:#708398; }
-.badge { border-radius:999px; padding:.42em .72em; }
-.badge-primary,.bg-primary { background-color:var(--eh-cyan-dark)!important; }
-.badge-success,.bg-success { background-color:#208d64!important; }
-.progress { height:.6rem; background-color:#dce6ef; border-radius:999px; }
-.progress-bar { background:linear-gradient(90deg,var(--eh-cyan),#58d5f5); }
-.alert { border-radius:10px; }
-.alert-info { color:#075b78; background:#e8faff; border-color:#a6eafa; }
-.alert-warning { color:#744006; background:#fff6de; border-color:#ffe09a; }
-#page-footer { color:#b9c8d4; background:#06111d; border-top:1px solid rgba(150,210,234,.18); }
-#page-footer a { color:var(--eh-cyan); }
-a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible { outline:3px solid var(--eh-cyan)!important; outline-offset:3px; }
-@media (max-width:767.98px) { #page.drawers .main-inner { padding:1rem; } #page-header { min-height:142px; padding:1.5rem; } #page-header::after { right:4%; } }
-
-/* Dark application mode: the work area is dark too, but never low-contrast. */
-#page.drawers,#page.drawers .main-inner,#region-main,.pagelayout-mydashboard #region-main { background:#091827; }
-#page.drawers .main-inner { border:1px solid rgba(115,177,207,.16); }
-.secondary-navigation,.tertiary-navigation,.moremenu,.nav-tabs { background:#102338; border-color:#28445a; }
-.secondary-navigation .navigation .nav-link,.nav-tabs .nav-link { color:#dcebf5; }
-.secondary-navigation .navigation .nav-link.active,.nav-tabs .nav-link.active { color:var(--eh-cyan); }
-.card,.block,.activity-item,.courseindex-item,.dropdown-menu,.popover,.modal-content,.message-app,.userselector,
-.course-content .section,.course-content .section .activity-item { color:#eaf4fb; background:#102338; border-color:#29475e; }
-.block .card-body,.card-body,.card-title,.block .card-title,h1,h2,h3,h4,h5,h6 { color:#f7fbff; }
-.text-muted,.description,.activity-information { color:#a9c0d0!important; }
-.activity-item:hover { background:#132e46; border-color:rgba(24,184,237,.7); }
-.activityname a,.aalink,.activitytitle a { color:#f3f9fd; }
-.activityname a:hover,.aalink:hover,.activitytitle a:hover { color:var(--eh-cyan); }
-.btn-secondary,.btn-outline-secondary { color:#eef8ff; background:#142c43; border-color:#5c7890; }
-.form-control,.custom-select,.form-control:focus,.custom-select:focus { color:#eef8ff; background-color:#0b1d2e; border-color:#476781; }
-.form-control::placeholder { color:#9bb2c2; }
-.progress { background:#284154; }
-.alert-info { color:#c8f4ff; background:#0c3446; border-color:#18799b; }
-.alert-warning { color:#ffe6aa; background:#4d3511; border-color:#9d741f; }
-
-/* Login: celebrate the winning team, with a sober dark credential panel. */
-body.pagelayout-login,#page-login-index { background:#061522; }
-body.pagelayout-login #page,body.pagelayout-login #page-wrapper { background:#061522; }
-body.pagelayout-login #page .login-layout-left {
-    position:relative;
-    background-image:linear-gradient(90deg,rgba(4,16,27,.44),rgba(4,16,27,.68)),url([[pix:theme|team-celebration]])!important;
-    background-position:center!important;
-    background-size:cover!important;
+    color-scheme: dark;
+    --bs-body-color: var(--eh-text);
+    --bs-body-color-rgb: 234, 244, 251;
+    --bs-body-bg: var(--eh-work);
+    --bs-body-bg-rgb: 9, 24, 39;
+    --bs-emphasis-color: #fff;
+    --bs-heading-color: #f7fbff;
+    --bs-secondary-color: var(--eh-muted);
+    --bs-secondary-bg: var(--eh-panel);
+    --bs-tertiary-color: var(--eh-muted);
+    --bs-tertiary-bg: var(--eh-panel-2);
+    --bs-border-color: var(--eh-line);
+    --bs-link-color: var(--eh-cyan);
+    --bs-link-color-rgb: 24, 184, 237;
+    --bs-link-hover-color: var(--eh-cyan-soft);
+    --bs-link-hover-color-rgb: 111, 214, 245;
+    --bs-gray-100: #0b1d2e;
+    --bs-gray-200: var(--eh-panel);
+    --bs-gray-600: var(--eh-muted);
+    --bs-gray-700: #c3d6e3;
 }
-body.pagelayout-login #page .login-layout-left::after { content:none!important; }
-body.pagelayout-login #page .login-layout-right { color:#eaf4fb; background:#0b1c2d!important; }
-body.pagelayout-login #page .login-container { color:#eaf4fb; background:transparent!important; box-shadow:none!important; }
-body.pagelayout-login #page .login-container h1,body.pagelayout-login #page .login-container h2,
-body.pagelayout-login #page .login-container h3,body.pagelayout-login #page .login-container label { color:#f8fcff!important; }
-body.pagelayout-login #page .login-container .form-control { color:#f8fcff; background:#102a40; border-color:#4c7490; }
-body.pagelayout-login #page .login-container .form-control:focus { border-color:var(--eh-cyan); }
-body.pagelayout-login #page .login-container a { color:var(--eh-cyan); }
-body.pagelayout-login #page .login-container .btn-primary { color:#fff; background:var(--eh-orange); border-color:var(--eh-orange); }
-body.pagelayout-login #page .login-container hr,body.pagelayout-login #page .login-container .separator { border-color:#35546c; }
-/* Moodle's Italian language pack currently exposes this label as “Username”. */
-body.pagelayout-login label[for="username"] { font-size:0; }
-body.pagelayout-login label[for="username"]::after { color:#f8fcff; content:"Nome utente o email"; font-size:1rem; }
+
+/* 2 · Shell ---------------------------------------------------------------- */
+body {
+    color: var(--eh-text);
+    background: var(--eh-navy);
+    font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+}
+#page-wrapper,
+#page {
+    background: radial-gradient(circle at 92% 4%, rgba(24, 184, 237, .13), transparent 26rem), var(--eh-navy);
+}
+#page { margin-top: 4rem; }
+
+#page.drawers,
+#page.drawers .main-inner,
+#region-main,
+.pagelayout-mydashboard #region-main {
+    background: var(--eh-work);
+}
+#page.drawers .main-inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    border: 1px solid rgba(115, 177, 207, .16);
+}
+@media (min-width: 992px) {
+    #page.drawers .main-inner {
+        margin-top: 1.5rem;
+        margin-bottom: 2.5rem;
+        border-radius: 16px;
+        box-shadow: 0 18px 42px rgba(0, 0, 0, .35);
+    }
+}
+
+a { color: var(--eh-cyan); }
+a:hover { color: var(--eh-cyan-soft); }
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { color: #f7fbff; }
+.text-muted, .text-body-secondary, .description, .activity-information { color: var(--eh-muted) !important; }
+hr { border-color: var(--eh-line); opacity: 1; }
+
+/* Top navbar */
+.navbar.fixed-top {
+    min-height: 4rem;
+    background: rgba(5, 17, 29, .97) !important;
+    border-bottom: 1px solid rgba(150, 210, 234, .18);
+    box-shadow: none;
+}
+.navbar .navbar-brand,
+.navbar .nav-link,
+.navbar .form-check-label,
+.navbar label,
+.navbar .editmode-switch-form,
+.usermenu .login a,
+.usermenu .dropdown-toggle { color: #f4fbff !important; }
+.navbar .nav-link:hover,
+.navbar .nav-link:focus,
+.moremenu .nav-link.active { color: var(--eh-cyan) !important; }
+.moremenu .nav-link.active { border-bottom: 3px solid var(--eh-orange) !important; }
+.navbar .form-switch .form-check-input:not(:checked) { background-color: #3a566c; border-color: #6c8aa1; }
+.navbar .form-switch .form-check-input:checked { background-color: var(--eh-orange); border-color: var(--eh-orange); }
+
+/* 3 · Page header: the project photography, still legible ------------------- */
+#page-header {
+    position: relative;
+    overflow: hidden;
+    min-height: 140px;
+    margin: 0 0 1rem;
+    padding: 2rem 2.5rem;
+    color: #fff;
+    background:
+        linear-gradient(95deg, rgba(7, 21, 34, .92) 0%, rgba(7, 21, 34, .62) 52%, rgba(7, 21, 34, .12) 100%),
+        url([[pix:theme|hero-car]]) center 56% / cover;
+    border: 0;
+    border-radius: var(--eh-radius);
+    box-shadow: none;
+}
+#page-header::after {
+    position: absolute;
+    top: -70px;
+    right: 14%;
+    width: 200px;
+    height: 300px;
+    border-left: 12px solid rgba(24, 184, 237, .55);
+    transform: skewX(-20deg);
+    content: '';
+    pointer-events: none;
+}
+#page-header .page-context-header,
+#page-header .header-actions-container { position: relative; z-index: 1; }
+#page-header h1,
+#page-header .h1,
+#page-header .page-header-headings { color: #fff; text-shadow: 0 2px 12px rgba(0, 0, 0, .55); }
+#page-header .breadcrumb-item,
+#page-header .breadcrumb-item a { color: rgba(255, 255, 255, .85); }
+#page-header .breadcrumb-item + .breadcrumb-item::before { color: var(--eh-cyan); }
+.pagelayout-mydashboard #page-header,
+.pagelayout-frontpage #page-header { min-height: 190px; display: flex; align-items: end; }
+
+/* 4 · Secondary / tertiary navigation (course tabs, admin tabs) -------------- */
+.secondary-navigation,
+.secondary-navigation .navigation,
+.secondary-navigation .moremenu,
+.secondary-navigation .nav-tabs,
+.tertiary-navigation,
+.tertiary-navigation .navitem,
+.moremenu,
+.nav-tabs {
+    background: var(--eh-panel) !important;
+    border-color: var(--eh-line);
+}
+.secondary-navigation { border-radius: var(--eh-radius); margin-bottom: 1rem; }
+.secondary-navigation .nav-link,
+.secondary-navigation .navigation .nav-link,
+.moremenu .nav-link,
+.nav-tabs .nav-link,
+.nav-tabs .nav-link:not(.active) { color: #dcebf5 !important; opacity: 1; }
+.secondary-navigation .nav-link:hover,
+.nav-tabs .nav-link:hover { color: #fff !important; background: rgba(24, 184, 237, .10); }
+.secondary-navigation .nav-link.active,
+.secondary-navigation .navigation .nav-link.active,
+.nav-tabs .nav-link.active {
+    color: var(--eh-cyan) !important;
+    background: transparent !important;
+    border-color: transparent transparent var(--eh-orange);
+    border-bottom: 3px solid var(--eh-orange) !important;
+}
+
+/* 5 · Surfaces ------------------------------------------------------------ */
+.card, .block, .activity-item, .courseindex-item, .dropdown-menu, .popover, .modal-content,
+.message-app, .userselector, .list-group-item, .course-content .section {
+    color: var(--eh-text);
+    background: var(--eh-panel);
+    border: 1px solid var(--eh-line);
+    box-shadow: none;
+}
+.card, .block, .activity-item { border-radius: var(--eh-radius); }
+.block { margin-bottom: 1rem; }
+.card-body, .card-title, .block .card-title { color: #f7fbff; }
+.card-header, .card-footer, .modal-header, .modal-footer { background: rgba(255, 255, 255, .03); border-color: var(--eh-line); }
+.table { --bs-table-color: var(--eh-text); --bs-table-bg: transparent; --bs-table-border-color: var(--eh-line); --bs-table-striped-bg: rgba(255, 255, 255, .03); --bs-table-hover-bg: rgba(24, 184, 237, .08); }
+.generaltable th { background: var(--eh-panel-2); color: #fff; }
+.badge { border-radius: 999px; padding: .42em .72em; }
+.badge-primary, .bg-primary, .text-bg-primary { background-color: var(--eh-cyan-dark) !important; color: #fff; }
+.badge-success, .bg-success, .text-bg-success { background-color: #208d64 !important; }
+.progress { height: .6rem; background-color: #284154; border-radius: 999px; }
+.progress-bar { background: linear-gradient(90deg, var(--eh-cyan), #58d5f5); }
+.alert { border-radius: 10px; }
+.alert-info { color: #c8f4ff; background: #0c3446; border-color: #18799b; }
+.alert-warning { color: #ffe6aa; background: #4d3511; border-color: #9d741f; }
+.alert-danger { color: #ffd5d0; background: #4a1a17; border-color: #a3382e; }
+.alert-success { color: #c9f3df; background: #0f3a2b; border-color: #208d64; }
+
+/* Course content */
+.activity-item { margin: .6rem 0; padding: .9rem 1rem; }
+.activity-item:hover { background: var(--eh-panel-2); border-color: rgba(24, 184, 237, .7); }
+.activityname a, .aalink, .activitytitle a { color: #f3f9fd; font-weight: 700; }
+.activityname a:hover, .aalink:hover, .activitytitle a:hover { color: var(--eh-cyan); }
+
+/* 6 · Course lists: dashboard cards + front-page / category boxes ------------ */
+.block_myoverview,
+[data-region="myoverview"] { border: 0; background: transparent; }
+.block_myoverview .card,
+[data-region="myoverview"] .card.dashboard-card {
+    overflow: hidden;
+    border-radius: 10px;
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.block_myoverview .card:hover,
+[data-region="myoverview"] .card.dashboard-card:hover {
+    border-color: rgba(24, 184, 237, .65);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, .35);
+    transform: translateY(-2px);
+}
+.block_myoverview .card .card-img-top,
+[data-region="myoverview"] .card .card-img-top,
+.dashboard-card-img {
+    min-height: 118px;
+    background: url([[pix:theme|team-celebration-sm]]) center 30% / cover;
+}
+
+/* Front page "Corsi disponibili" and course category listings.
+   Photo on the right edge, text always on solid panel colour. */
+.coursebox,
+.course_category_tree .coursebox,
+.frontpage-course-list-all .coursebox,
+.frontpage-course-list-enrolled .coursebox {
+    position: relative;
+    overflow: hidden;
+    margin: 0 0 .9rem;
+    padding: 1rem 1.25rem;
+    color: var(--eh-text);
+    background:
+        linear-gradient(90deg, var(--eh-panel) 0%, var(--eh-panel) 52%, rgba(16, 35, 56, .78) 100%),
+        url([[pix:theme|team-celebration-sm]]) right 30% / cover;
+    border: 1px solid var(--eh-line);
+    border-radius: var(--eh-radius);
+    transition: border-color .18s ease, box-shadow .18s ease;
+}
+.coursebox:hover { border-color: rgba(24, 184, 237, .7); box-shadow: 0 10px 22px rgba(0, 0, 0, .3); }
+.coursebox .coursename,
+.coursebox .coursename a,
+.coursebox .aalink { color: #fff; font-size: 1.1rem; font-weight: 700; }
+.coursebox .coursename a:hover { color: var(--eh-cyan); }
+.coursebox .content,
+.coursebox .summary,
+.coursebox .summary p,
+.coursebox .teachers,
+.coursebox .teachers li,
+.coursebox .coursecat,
+.coursebox .coursefield { color: #dcebf5; }
+.coursebox .teachers .teacher-label,
+.coursebox .teachers b,
+.coursebox .fieldname,
+.coursebox .coursecat span,
+.coursebox .text-muted { color: var(--eh-muted) !important; }
+.coursebox .teachers a, .coursebox .coursecat a { color: var(--eh-cyan); }
+.coursebox .icon, .coursebox .icon.fa { color: var(--eh-cyan-soft); opacity: 1; }
+.coursebox .course-info-container, .coursebox .info { position: relative; }
+
+/* 7 · Forms and buttons --------------------------------------------------- */
+.btn { border-radius: 999px; font-weight: 700; letter-spacing: .01em; }
+.btn-primary,
+.btn-primary:not(:disabled):not(.disabled):active {
+    color: #fff;
+    background: var(--eh-orange);
+    border-color: var(--eh-orange);
+    box-shadow: 0 6px 14px rgba(255, 84, 46, .22);
+}
+.btn-primary:hover, .btn-primary:focus { background: var(--eh-orange-dark); border-color: var(--eh-orange-dark); }
+.btn-secondary, .btn-outline-secondary { color: #eef8ff; background: #142c43; border-color: #5c7890; }
+.btn-secondary:hover, .btn-outline-secondary:hover { background: #1a3a58; border-color: var(--eh-cyan); color: #fff; }
+.btn-outline-primary { color: var(--eh-cyan); border-color: var(--eh-cyan-dark); }
+.btn-outline-primary:hover { color: #fff; background: var(--eh-cyan-dark); border-color: var(--eh-cyan-dark); }
+.btn-link { color: var(--eh-cyan); }
+.form-control, .form-select, .custom-select,
+.form-control:focus, .form-select:focus {
+    color: #eef8ff;
+    background-color: #0b1d2e;
+    border-color: #476781;
+}
+.form-control:focus, .form-select:focus { border-color: var(--eh-cyan); box-shadow: 0 0 0 .2rem rgba(24, 184, 237, .22); }
+.form-control::placeholder { color: #9bb2c2; }
+.form-control:disabled, .form-select:disabled { background-color: #0a1826; color: var(--eh-muted); }
+.input-group-text { color: var(--eh-text); background: var(--eh-panel-2); border-color: #476781; }
+.form-check-input { background-color: #0b1d2e; border-color: #6c8aa1; }
+.form-check-input:checked { background-color: var(--eh-cyan-dark); border-color: var(--eh-cyan-dark); }
+.form-label, label, legend, .col-form-label { color: #dcebf5; }
+.form-text, .form-description, .text-muted.form-text { color: var(--eh-muted) !important; }
+
+/* Admin settings pages */
+#adminsettings, .admin_settingspage, .settingsform { color: var(--eh-text); }
+.form-item .form-label, .form-item .form-setting, .form-item .form-defaultinfo { color: #dcebf5; }
+.admin_settingspage .form-item { border-color: var(--eh-line); }
+.adminsettingsform .row, .path-admin .table td { border-color: var(--eh-line); }
+.path-admin .form-defaultinfo, .path-admin .form-shortname { color: var(--eh-muted); }
+
+/* 8 · Menus (user menu, "more", dropdowns, popovers) --------------------- */
+.dropdown-menu {
+    --bs-dropdown-bg: var(--eh-panel);
+    --bs-dropdown-color: var(--eh-text);
+    --bs-dropdown-link-color: var(--eh-text);
+    --bs-dropdown-link-hover-color: #fff;
+    --bs-dropdown-link-hover-bg: rgba(24, 184, 237, .16);
+    --bs-dropdown-link-active-bg: var(--eh-cyan-dark);
+    --bs-dropdown-border-color: var(--eh-line);
+    --bs-dropdown-divider-bg: var(--eh-line);
+    --bs-dropdown-header-color: var(--eh-muted);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, .45);
+}
+.dropdown-menu .dropdown-item,
+.dropdown-menu a,
+.dropdown-menu .carousel-item a,
+.usermenu .dropdown-menu .dropdown-item { color: var(--eh-text) !important; }
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu .dropdown-item:focus { color: #fff !important; background: rgba(24, 184, 237, .16); }
+.dropdown-menu .dropdown-item.active,
+.dropdown-menu .dropdown-item:active { color: #fff !important; background: var(--eh-cyan-dark); }
+.dropdown-menu .dropdown-divider { border-color: var(--eh-line); opacity: 1; }
+.dropdown-menu .dropdown-header, .dropdown-menu .text-muted { color: var(--eh-muted) !important; }
+.popover { --bs-popover-bg: var(--eh-panel); --bs-popover-body-color: var(--eh-text); --bs-popover-header-bg: var(--eh-panel-2); --bs-popover-header-color: #fff; }
+.avatar-initials, .userinitials { color: #10253b; background: #e7f1f8; }
+
+/* 9 · Drawers and footer --------------------------------------------------- */
+.drawer { color: #d9e7f1; background: var(--eh-navy) !important; border-color: rgba(150, 210, 234, .18) !important; }
+.drawer .list-group-item,
+.drawer .list-group-item-action,
+.drawer .courseindex-section-title,
+.drawer .courseindex-item { color: #d9e7f1; background: transparent; border-color: rgba(150, 210, 234, .12); }
+.drawer .list-group-item-action:hover,
+.drawer .list-group-item-action:focus,
+.drawer .list-group-item.active,
+.drawer .courseindex-item.pageitem:hover { color: #fff; background: rgba(24, 184, 237, .13); }
+#page-footer { color: #b9c8d4; background: #06111d; border-top: 1px solid rgba(150, 210, 234, .18); }
+#page-footer a { color: var(--eh-cyan); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: 3px solid var(--eh-cyan) !important;
+    outline-offset: 3px;
+}
+@media (max-width: 767.98px) {
+    #page.drawers .main-inner { padding: 1rem; }
+    #page-header { min-height: 142px; padding: 1.5rem; }
+    #page-header::after { right: 4%; }
+}
+
+/* 10 · Login ---------------------------------------------------------------
+   Left: team photo with E-Horizon panel (template: templates/core/login_panel).
+   Right: sober dark credential panel. */
+body.pagelayout-login,
+#page-login-index,
+body.pagelayout-login #page,
+body.pagelayout-login #page-wrapper { background: #061522; }
+
+body.pagelayout-login #page .login-layout-left {
+    position: relative;
+    background:
+        linear-gradient(180deg, rgba(4, 16, 27, .15) 0%, rgba(4, 16, 27, .70) 100%),
+        url([[pix:theme|team-celebration]]) center 35% / cover !important;
+}
+body.pagelayout-login #page .login-layout-left::after { content: none !important; }
+body.pagelayout-login #page .login-layout-left-content {
+    max-width: 480px;
+    margin-bottom: 0;
+    padding: 2rem 2.25rem;
+    color: #fff;
+    text-align: left;
+    background: rgba(5, 17, 29, .78);
+    border: 1px solid rgba(111, 214, 245, .28);
+    border-left: 6px solid var(--eh-orange);
+    border-radius: var(--eh-radius);
+    backdrop-filter: blur(6px);
+}
+.eh-login-eyebrow { margin: 0 0 .5rem; color: var(--eh-cyan); font-size: .8rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.eh-login-title { margin: 0 0 .75rem; color: #fff; font-size: 2.1rem; font-weight: 800; line-height: 1.1; }
+.eh-login-title span { color: var(--eh-orange); }
+.eh-login-lead { margin: 0 0 1.5rem; color: #dcebf5; font-size: 1.02rem; line-height: 1.55; }
+.eh-login-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; margin: 0; padding: 0; list-style: none; }
+.eh-login-steps li { padding-top: .75rem; border-top: 3px solid var(--eh-cyan); }
+.eh-login-steps li:nth-child(3) { border-top-color: var(--eh-orange); }
+.eh-login-steps strong { display: block; color: #fff; font-size: 1.05rem; }
+.eh-login-steps span { color: var(--eh-muted); font-size: .85rem; }
+
+body.pagelayout-login #page .login-layout-right { color: var(--eh-text); background: #0b1c2d !important; }
+body.pagelayout-login #page .login-container { color: var(--eh-text); background: transparent !important; box-shadow: none !important; }
+body.pagelayout-login #page .login-container h1,
+body.pagelayout-login #page .login-container h2,
+body.pagelayout-login #page .login-container h3,
+body.pagelayout-login #page .login-container label { color: #f8fcff !important; }
+body.pagelayout-login #page .login-container a { color: var(--eh-cyan); }
+body.pagelayout-login #page .login-container .login-separator { color: #9bb2c2; }
+body.pagelayout-login #page .login-container .login-separator::before,
+body.pagelayout-login #page .login-container .login-separator::after,
+body.pagelayout-login #page .login-container hr { border-color: #35546c; background-color: #35546c; }
+body.pagelayout-login #page .login-container .form-control,
+body.pagelayout-login #page .login-container .login-form .login-input-wrapper .form-control,
+body.pagelayout-login #page .login-container .login-form .login-input-wrapper .form-control:hover {
+    color: #f8fcff;
+    background-color: #102a40;
+    border-color: #4c7490;
+}
+body.pagelayout-login #page .login-container .form-control:focus { border-color: var(--eh-cyan); }
+body.pagelayout-login #page .login-container .login-input-icon { color: #9bb2c2; }
+body.pagelayout-login #page .login-container .toggle-sensitive-btn {
+    --bs-btn-color: #c3d6e3;
+    --bs-btn-bg: #102a40;
+    --bs-btn-hover-bg: #17405c;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-active-bg: #17405c;
+    border-color: #4c7490;
+}
+/* Browser autofill paints inputs pale blue; keep them on-palette. */
+body.pagelayout-login input:-webkit-autofill,
+body.pagelayout-login input:-webkit-autofill:hover,
+body.pagelayout-login input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #f8fcff;
+    caret-color: #f8fcff;
+    box-shadow: 0 0 0 1000px #102a40 inset;
+    transition: background-color 9999s ease-out 0s;
+}
+body.pagelayout-login #page .login-container .btn-primary { color: #fff; background: var(--eh-orange); border-color: var(--eh-orange); }
+/* Moodle's Italian pack labels this field "Username"; only patch it for Italian. */
+body.pagelayout-login:lang(it) label[for="username"] { font-size: 0; }
+body.pagelayout-login:lang(it) label[for="username"]::after { color: #f8fcff; content: "Nome utente o email"; font-size: 1rem; }
+@media (max-width: 991.98px) {
+    body.pagelayout-login #page .login-layout-right { background:
+        linear-gradient(180deg, rgba(6, 21, 34, .94), rgba(6, 21, 34, .98)),
+        url([[pix:theme|hero-car-sm]]) center / cover !important; }
+}
