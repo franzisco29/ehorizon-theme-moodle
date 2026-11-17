@@ -22,6 +22,8 @@
     --eh-cyan-dark: #087aa5;
     --eh-orange: #ff542e;
     --eh-orange-dark: #dc3e1e;
+    --eh-orange-btn: #d93a15;       /* white text 4.6:1 (AA) */
+    --eh-orange-btn-hover: #b92f0f; /* white text 6.2:1 */
     --eh-radius: 12px;
 
     color-scheme: dark;
@@ -144,17 +146,32 @@ hr { border-color: var(--eh-line); opacity: 1; }
 .pagelayout-frontpage #page-header { min-height: 190px; display: flex; align-items: end; }
 
 /* 4 · Secondary / tertiary navigation (course tabs, admin tabs) -------------- */
-.secondary-navigation,
-.secondary-navigation .navigation,
+.secondary-navigation {
+    margin: 0 0 1rem;
+    padding: 0;
+    background: transparent !important;
+    border: 0;
+    border-radius: 0;
+}
+.secondary-navigation .navigation {
+    margin: 0;
+    background: var(--eh-panel) !important;
+    border: 1px solid var(--eh-line);
+    border-radius: var(--eh-radius);
+    overflow: hidden;
+}
 .secondary-navigation .moremenu,
-.secondary-navigation .nav-tabs,
+.secondary-navigation .nav-tabs {
+    margin: 0;
+    background: transparent !important;
+    border: 0 !important;
+}
 .tertiary-navigation,
 .tertiary-navigation .navitem,
 #page .nav-tabs {
     background: var(--eh-panel) !important;
     border-color: var(--eh-line);
 }
-.secondary-navigation { border-radius: var(--eh-radius); margin-bottom: 1rem; }
 .secondary-navigation .nav-link,
 .secondary-navigation .navigation .nav-link,
 .nav-tabs .nav-link,
@@ -251,7 +268,7 @@ hr { border-color: var(--eh-line); opacity: 1; }
     color: var(--eh-text);
     background:
         linear-gradient(90deg, var(--eh-panel) 0%, var(--eh-panel) 52%, rgba(16, 35, 56, .78) 100%),
-        url([[pix:theme|team-celebration-sm]]) right 30% / cover;
+        url([[pix:theme|team-celebration-sm]]) right 38% / cover;
     border: 1px solid var(--eh-line);
     border-radius: var(--eh-radius);
     transition: border-color .18s ease, box-shadow .18s ease;
@@ -282,11 +299,11 @@ hr { border-color: var(--eh-line); opacity: 1; }
 .btn-primary,
 .btn-primary:not(:disabled):not(.disabled):active {
     color: #fff;
-    background: var(--eh-orange);
-    border-color: var(--eh-orange);
+    background: var(--eh-orange-btn);
+    border-color: var(--eh-orange-btn);
     box-shadow: 0 6px 14px rgba(255, 84, 46, .22);
 }
-.btn-primary:hover, .btn-primary:focus { background: var(--eh-orange-dark); border-color: var(--eh-orange-dark); }
+.btn-primary:hover, .btn-primary:focus { background: var(--eh-orange-btn-hover); border-color: var(--eh-orange-btn-hover); }
 .btn-secondary, .btn-outline-secondary { color: #eef8ff; background: #142c43; border-color: #5c7890; }
 .btn-secondary:hover, .btn-outline-secondary:hover { background: #1a3a58; border-color: var(--eh-cyan); color: #fff; }
 .btn-outline-primary { color: var(--eh-cyan); border-color: var(--eh-cyan-dark); }
@@ -371,7 +388,9 @@ body.pagelayout-login #page,
 body.pagelayout-login #page-wrapper { background: #061522; }
 
 body.pagelayout-login #page .login-layout-left {
-    position: relative;
+    position: sticky;
+    top: 0;
+    min-height: 100vh;
     background:
         linear-gradient(180deg, rgba(4, 16, 27, .15) 0%, rgba(4, 16, 27, .70) 100%),
         url([[pix:theme|team-celebration]]) center 35% / cover !important;
@@ -443,7 +462,7 @@ body.pagelayout-login input:-webkit-autofill:focus {
     box-shadow: 0 0 0 1000px #102a40 inset;
     transition: background-color 9999s ease-out 0s;
 }
-body.pagelayout-login #page .login-container .btn-primary { color: #fff; background: var(--eh-orange); border-color: var(--eh-orange); }
+body.pagelayout-login #page .login-container .btn-primary { color: #fff; background: var(--eh-orange-btn); border-color: var(--eh-orange-btn); }
 /* Moodle's Italian pack labels this field "Username"; only patch it for Italian. */
 body.pagelayout-login:lang(it) label[for="username"] { font-size: 0; }
 body.pagelayout-login:lang(it) label[for="username"]::after { color: #f8fcff; content: "Nome utente o email"; font-size: 1rem; }
@@ -452,3 +471,347 @@ body.pagelayout-login:lang(it) label[for="username"]::after { color: #f8fcff; co
         linear-gradient(180deg, rgba(6, 21, 34, .94), rgba(6, 21, 34, .98)),
         url([[pix:theme|hero-car-sm]]) center / cover !important; }
 }
+
+/* 11 · Boost hard-coded light colours -------------------------------------
+   Boost writes some colours as literal hex values (they ignore the Bootstrap
+   variables above), so they are overridden explicitly here. */
+
+/* Course sections: titles, borders, collapse button */
+.course-section .section-item,
+.course-content .course-section .section-item {
+    color: var(--eh-text);
+    background: var(--eh-panel);
+    border: 1px solid var(--eh-line) !important;
+}
+.course-section .sectionname,
+.course-section .sectionname > a,
+.course-section .sectionname a,
+.course-section-header .sectionname,
+.course-section-header h3,
+.course-section-header .course-section-header-title { color: #f7fbff !important; }
+.course-section .sectionname > a:hover { color: var(--eh-cyan) !important; }
+.course-section.hidden .section-item,
+.course-section.orphaned .section-item,
+.activity-item.hiddenactivity { background: #0c1c2d; border-style: dashed !important; }
+.course-section .availabilityinfo { color: #dcebf5; background: #0b1d2e; border: 1px solid var(--eh-line); }
+.course-section .section-summary-activities .icon,
+.course-section .section_goto .icon { color: var(--eh-cyan); }
+.course-section.current > .section-item::before { border-left-color: var(--eh-orange); }
+.course-section .summarytext, .course-section .summary, .course-section .no-overflow { color: #dcebf5; }
+.course-section-header .icons-collapse-expand,
+.course-section-header .btn-icon {
+    color: var(--eh-cyan) !important;
+    background: rgba(24, 184, 237, .14) !important;
+    border: 1px solid rgba(24, 184, 237, .45);
+}
+.course-section-header .icons-collapse-expand .icon,
+.course-section-header .btn-icon .icon { color: var(--eh-cyan) !important; }
+.course-section .section-item .divider,
+.course-section-header { border-color: var(--eh-line) !important; }
+.activity-item .activity-completion .completion-dialog .editcompletion a:hover,
+.action-menu .dropdown-subpanel.content-displayed { background: rgba(24, 184, 237, .14); }
+.changenumsections .divider .btn.add-content { color: var(--eh-cyan); }
+
+/* Course index drawer */
+.courseindex .courseindex-item .courseindex-link,
+.courseindex .courseindex-item .courseindex-chevron,
+.courseindex .courseindex-section-title .courseindex-link,
+.courseindex .courseindex-section-title,
+.drawerheader .drawerheading,
+.drawerheader .drawerheading #courseindexdrawerheading .courseindex-link { color: #dcebf5 !important; }
+.courseindex .courseindex-item:hover,
+.courseindex .courseindex-item:focus,
+.courseindex .courseindex-item:hover .courseindex-link,
+.courseindex .courseindex-item:hover .courseindex-chevron,
+.courseindex .courseindex-item:focus .courseindex-link { color: #fff !important; background: rgba(24, 184, 237, .13); }
+.courseindex .courseindex-item.pageitem,
+.courseindex .courseindex-item.active,
+.courseindex .courseindex-item:hover.pageitem {
+    color: #fff !important;
+    background: rgba(24, 184, 237, .22);
+    border-color: rgba(24, 184, 237, .55);
+}
+.courseindex .courseindex-item.pageitem .courseindex-link,
+.courseindex .courseindex-item.pageitem .courseindex-chevron { color: #fff !important; }
+.courseindex .courseindex-section.current { border-left-color: var(--eh-orange); }
+.courseindex .courseindex-item.dragging, .courseindex .courseindex-section.dragging { background: var(--eh-panel-2); border-color: var(--eh-cyan); }
+.courseindex .dimmed, .courseindex .dimmed .courseindex-link { color: var(--eh-muted) !important; }
+
+/* Sticky form buttons bar (Save / Cancel) and bulk-action bar */
+.stickyfooter,
+.stickyfooter.bg-white,
+#sticky-footer,
+.sticky-footer-content-wrapper {
+    color: var(--eh-text);
+    background: #0b1c2d !important;
+    border-top: 1px solid var(--eh-line);
+    box-shadow: 0 -10px 24px rgba(0, 0, 0, .4);
+}
+.stickyfooter .btn-secondary { background: #142c43; }
+
+/* Dialogues, choosers, file picker, messages, question bank, listings */
+.modal-content, .moodle-dialogue-base .moodle-dialogue-wrap, .moodle-dialogue-base .moodle-dialogue,
+.moodle-dialogue-base .moodle-dialogue .moodle-dialogue-bd, .moodle-dialogue-base .moodle-dialogue .moodle-dialogue-bd body,
+.moodle-dialogue-base .moodle-dialogue .moodle-dialogue-hd {
+    color: var(--eh-text);
+    background: var(--eh-panel);
+    border-color: var(--eh-line);
+}
+.moodle-dialogue-base .moodle-dialogue .content-lightbox { background: rgba(7, 21, 34, .85); }
+.modchoosernav, .modchooser .optionsummary, .choosercontainer #chooseform .selected,
+.modchoosercontent .optionscontainer .option:not(.selected):hover,
+.modchoosernav .nav-link:not(.active):hover,
+#chooseqtype .selected, #chooseqtype .qtypesummary {
+    color: var(--eh-text);
+    background: var(--eh-panel) !important;
+    border-color: var(--eh-line);
+}
+.file-picker .fp-content, .fp-panel-button, .fp-iconview .fp-thumbnail:hover, .fp-iconview .fp-filename-field .fp-filename,
+.fp-select .fp-thumbnail, .filepicker-filelist .dndupload-target, .filemanager-container .dndupload-target,
+.filemanager .yui3-datatable-header, .filemanager .yui3-datatable-even .yui3-datatable-cell,
+.filemanager .yui3-datatable-odd .yui3-datatable-cell {
+    color: var(--eh-text);
+    background: var(--eh-panel) !important;
+    border-color: var(--eh-line);
+}
+.message-app .message.received { color: var(--eh-text); background: var(--eh-panel-2); }
+.message-app .message.send { color: #fff; background: var(--eh-cyan-dark); }
+.formlisting, .que .info, table.question-bank-table, #page-mod-quiz-edit div.question div.content,
+#page-mod-quiz-edit div.question div.content div.questioncontrols,
+#page-mod-quiz-edit div.question div.content div.points,
+#page-mod-quiz-edit div.quizpage .pagecontent .pagestatus,
+#course-category-listings.columns-3, #course-category-listings.columns-3 #category-listing > div,
+#course-category-listings.columns-3 #course-listing > div, #course-category-listings .listitem.highlight,
+.block .block-cards .course-summaryitem, .simplesearchform .collapse.show, .simplesearchform .collapsing,
+.simplesearchform .btn-submit {
+    color: var(--eh-text);
+    background: var(--eh-panel);
+    border-color: var(--eh-line);
+}
+.region_main_settings_menu_proxy { background: transparent; }
+.pagelayout-maintenance .page-header-headings, .pagelayout-secure .page-header-headings { background: transparent; }
+.visually-hidden-focusable:active, .visually-hidden-focusable:focus { color: #fff; background: var(--eh-navy); }
+
+/* Scrollbars on dark surfaces */
+.drawercontent::-webkit-scrollbar-track { background: var(--eh-navy); }
+.drawercontent::-webkit-scrollbar-thumb { background: #35546c; border-radius: 8px; }
+
+/* 12 · Light literal borders and popovers ---------------------------------- */
+body:not(.editing) .activity-item,
+.activity-item .activity-groupmode-info,
+.activity-item .activity-altcontent.activity-description,
+.activity-item .activity-afterlink,
+.path-mod .activity-description.has-automatic-completion,
+body:not(.editing) .single-section > ul > .course-section .section-item .activity:last-child,
+body:not(.editing) .activity.subsection .section-item .course-content-item-content,
+body:not(.editing) .activity.subsection .section-item .course-section-header:has(.icons-collapse-expand.collapsed),
+.course-section .section-summary-activities + .section,
+.tertiary-navigation.full-width-bottom-border,
+.popover-process-monitor .queue-process,
+.search-widget .dropdown-menu .unsearchablecontentcontainer { border-color: var(--eh-line) !important; }
+.course-content .divider hr,
+.changenumsections.disabled .course-content .divider hr,
+.max-section-alert,
+.bulkenabled .activity { border-color: #3a5a73 !important; }
+.navbar.fixed-top { border-bottom-color: rgba(150, 210, 234, .18) !important; }
+
+/* Front page / search result course boxes: Boost targets them by id. */
+#frontpage-available-course-list .coursebox,
+#frontpage-course-list .coursebox,
+.course-search-result .coursebox { border: 1px solid var(--eh-line); border-radius: var(--eh-radius); }
+
+/* Notification / message popovers in the navbar */
+.popover-region-container,
+.popover-region-header-container,
+.popover-region-footer-container,
+.popover-region-content-container,
+.popover-region-container .content-item-container {
+    color: var(--eh-text);
+    background: var(--eh-panel);
+    border-color: var(--eh-line);
+}
+.popover-region-container .content-item-container:hover,
+.popover-region-container .content-item-container.unread { background: var(--eh-panel-2); }
+.popover-region-container a, .popover-region-container .mark-all-read-button { color: var(--eh-cyan); }
+.popover-region-toggle::before { border-bottom-color: var(--eh-line); }
+.popover-region-toggle::after { border-bottom-color: var(--eh-panel); }
+
+/* Preferences tables, scrollbars, login blockquote */
+.preferences-container .preference-table,
+.preferences-container .preference-table tr th,
+.preferences-container .preference-table tr td:nth-child(even) { border-color: var(--eh-line); }
+.drawercontent::-webkit-scrollbar-thumb,
+.table-responsive::-webkit-scrollbar-thumb,
+#page.drawers::-webkit-scrollbar-thumb { border-color: var(--eh-navy); background-color: #35546c; }
+.login-layout-left-content blockquote { border-left-color: var(--eh-orange); }
+
+/* Secondary navigation: one full-width rounded bar. Boost caps .nav-tabs at the
+   course content width and the generic tab rule above paints it square. */
+#page .secondary-navigation .navigation {
+    padding: 0 .5rem;
+    background: var(--eh-panel) !important;
+    border: 1px solid var(--eh-line);
+    border-radius: var(--eh-radius);
+    overflow: hidden;
+}
+#page .secondary-navigation .navigation .nav-tabs {
+    max-width: none;
+    margin: 0;
+    background: transparent !important;
+    border: 0 !important;
+}
+
+/* 13 · Utility classes, filters, grader, choosers ---------------------------
+   Moodle templates hard-code Bootstrap's light utilities (bg-white, bg-light).
+   Badges keep them on purpose (they pair with text-dark). */
+.bg-white:not(.badge),
+.bg-light:not(.badge),
+.card-footer.bg-white {
+    color: var(--eh-text);
+    background-color: var(--eh-panel) !important;
+}
+.border-white, .border-light { border-color: var(--eh-line) !important; }
+.btn-light { color: #eef8ff; background: #142c43; border-color: #5c7890; }
+.btn-light:hover { color: #fff; background: #1a3a58; border-color: var(--eh-cyan); }
+.btn.text-reset, .btn-link.text-reset { color: var(--eh-cyan) !important; }
+
+/* Dashboard course cards: footer + action menu, category line */
+.card .card-footer, .card .card-footer.menu { background-color: transparent !important; border: 0; }
+.card .categoryname,
+.course-card .categoryname,
+.card .multiline + .categoryname { color: var(--eh-muted) !important; }
+.card .coursemenubtn, .card .coursemenubtn .icon { color: #dcebf5; }
+
+/* Participants / data filters */
+.filter-group { color: var(--eh-text); background: var(--eh-panel-2) !important; border-color: var(--eh-line) !important; }
+.filter-group .bg-white { background: var(--eh-panel) !important; }
+.filter-group label, .filter-group legend, .filter-group .text-uppercase { color: #dcebf5; }
+.filter-group [data-filteraction="add"] { color: var(--eh-cyan) !important; }
+.form-autocomplete-selection .badge, .form-autocomplete-selection .badge.bg-secondary { color: #eef8ff !important; background: #1a3a58 !important; }
+.form-autocomplete-suggestions {
+    color: var(--eh-text);
+    background-color: var(--eh-panel);
+    border-color: var(--eh-line);
+    box-shadow: 0 12px 26px rgba(0, 0, 0, .45);
+}
+.form-autocomplete-suggestions li { color: var(--eh-text); }
+.form-autocomplete-suggestions li.suggestions-heading { color: #fff; background-color: var(--eh-panel-2); }
+.form-autocomplete-suggestions li:hover,
+.form-autocomplete-suggestions li:focus,
+.form-autocomplete-suggestions li[aria-selected=true] { color: #fff; background-color: var(--eh-cyan-dark); }
+
+/* Activity chooser: category list on the left */
+.modchoosernav .nav-link {
+    --bs-nav-link-color: #dcebf5;
+    --bs-nav-link-hover-color: #fff;
+    color: #dcebf5;
+}
+.modchoosernav .nav-link.active { color: #fff; background: #1a3a58; border-color: var(--eh-cyan-dark); }
+.modchoosernav .nav-link:not(.active):hover { color: #fff; background: rgba(24, 184, 237, .14) !important; border-color: var(--eh-line); }
+.modchoosercontent .optionscontainer .option .optionname,
+.modchoosercontent .optionscontainer .option .option-name { color: #f3f9fd; }
+.modchoosercontent .optionscontainer .option:hover { background: rgba(24, 184, 237, .10); }
+.modal-body .nav-link { color: #dcebf5; }
+
+/* Grader report */
+.path-grade-report-grader .gradeparent,
+.path-grade-report-grader .gradeparent .cell,
+.path-grade-report-grader .gradeparent th,
+.path-grade-report-grader .gradeparent td { color: var(--eh-text); }
+.path-grade-report-grader .gradeparent a { color: var(--eh-cyan); }
+.path-grade-report-grader .gradeparent tr .cell,
+.path-grade-report-grader .gradeparent .floater .cell { background-color: var(--eh-panel); }
+.path-grade-report-grader .gradeparent .heading .cell,
+.path-grade-report-grader .gradeparent .cell.category,
+.path-grade-report-grader .gradeparent .avg .cell,
+.path-grade-report-grader .gradeparent .user.cell { background-color: var(--eh-panel-2); color: #fff; }
+.path-grade-report-grader .gradeparent table,
+.path-grade-report-grader .gradeparent .cell { border-color: var(--eh-line); }
+.path-grade-report-grader .gradeparent .heading .cell a,
+.path-grade-report-grader .gradeparent .heading .cell .gradeitemheader { color: #fff; }
+.path-grade-report-grader .gradeparent .icon { color: var(--eh-cyan-soft); }
+
+/* Gradebook setup tree and other legacy tables */
+.path-grade-edit-tree .gradetree-wrapper,
+.path-grade-edit-tree .gradetree-wrapper .setup-grades.table tr th,
+.path-grade-edit-tree .gradetree-wrapper .setup-grades.table tr td,
+.path-grade-edit-tree .gradetree-wrapper .setup-grades.table tr.item.categoryitem td,
+.path-grade-edit-tree .gradetree-wrapper .setup-grades.table tr.item.courseitem td {
+    color: var(--eh-text);
+    background-color: var(--eh-panel-2);
+}
+.path-grade-edit-tree .gradetree-wrapper .setup-grades.table tr.category td,
+.path-grade-edit-tree .gradetree-wrapper .setup-grades.table tr.item td {
+    background-color: var(--eh-panel);
+    border-color: var(--eh-line);
+}
+.path-grade-edit-tree .gradetree-wrapper .setup-grades.table tr.category td.column-name div a.toggle-category i,
+.reportbuilder-table th button .icon { color: var(--eh-cyan-soft); }
+#page-report-outline-index #outlinereport tbody tr { background-color: var(--eh-panel); }
+.reportbuilder-sortable-list li.sortable-list-is-dragged,
+.reportbuilder-table th.sortable-list-is-dragged,
+.reportbuilder-conditions-list .condition.sortable-list-is-dragged { background-color: var(--eh-panel-2); }
+.path-grade-edit-tree .gradetree-wrapper .setup-grades.table th,
+.path-grade-edit-tree .gradetree-wrapper .setup-grades.table td { border-color: var(--eh-line) !important; }
+
+/* 14 · Global audit: remaining literal colours in Boost ----------------------
+   Found by scanning every Boost 5.2 rule for hard-coded light backgrounds and
+   dark text that none of the sections above already restyle. */
+
+/* Muted greys (#6a737b / #6c757d) are too dim on dark surfaces. */
+.blockquote-footer, .form-floating > :disabled ~ label, .select-menu ul[role=group] li:first-child,
+#page-admin-tasklogs .task-class, .cal_courses_flt, .max-section-alert, .editing .editinprogress:after,
+.path-mod-feedback hr.feedback_pagebreak, .reportbuilder-toggle-card .toggle-card-button i.toggle-card-icon,
+.reportbuilder-report table.reportbuilder-table tr td.card-toggle button,
+.custom-control-input:disabled ~ .custom-control-label, .custom-control-input[disabled] ~ .custom-control-label { color: var(--eh-muted) !important; }
+
+/* Activity details, dates and completion popup */
+.activity-item .activity-dates, .path-mod .activity-dates .date-item,
+.activity-item .activity-completion .completion-dialog,
+.activity-item .activity-completion .completion-dialog .editcompletion a { color: #dcebf5; }
+.activity-item .activity-completion .completion-dialog { background: var(--eh-panel-2); border-color: var(--eh-line); }
+.path-mod .activity-details:not(:empty) { background: var(--eh-panel-2); }
+.icon-box { background: var(--eh-panel-2); }
+.defaultactivitycompletion-item a, .path-grade-edit-tree .collapse-list .unlist .collapse-list-item .collapse-list-link { color: var(--eh-cyan); }
+
+/* Focus states that Boost paints near-black */
+.aalink.focus, .arrow_link.focus, .arrow_link:focus, a:not([class]).focus,
+.activityinstance > a.focus, .activityinstance > a:focus, #page-footer a:not([class]).focus,
+.popover.footer .popover-body .footer-section a { color: var(--eh-cyan-soft); }
+.matchtext, #qtypechoicecontainer, .block_recentlyaccesseditems a.card .small,
+#course-category-listings .listitem > div .without-actions, .form-autocomplete-downarrow { color: var(--eh-text); }
+
+/* Pills, nav-tabs outside the more-menu, small panels */
+.nav-pills, .nav-tabs:not(.more-nav) { background-color: var(--eh-panel-2); }
+.nav-pills .nav-link { color: #dcebf5; }
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link { color: #fff; background-color: var(--eh-cyan-dark); }
+.changenumsections.disabled .course-content .divider .btn.add-content,
+.changenumsections.disabled .course-content .divider .btn.add-content:hover,
+.changenumsections.disabled .course-content .divider .btn.add-content:focus { background-color: var(--eh-panel-2); }
+.hover-tooltip-container .hover-tooltip { color: var(--eh-text); background-color: var(--eh-panel-2); border: 1px solid var(--eh-line); }
+#course-category-listings.columns-3 #course-detail > div { background-color: var(--eh-panel); }
+.form-autocomplete-downarrow .loading-icon { background-color: var(--eh-panel); }
+
+/* Choosers, error dialogs, file picker, backup */
+.jschooser .choosercontainer #chooseform .instruction, .jschooser .choosercontainer #chooseform .typesummary,
+#chooseqtype .instruction { color: var(--eh-text); background-color: var(--eh-panel); }
+.moodle-dialogue-exception .param-stacktrace label { color: #fff; background-color: var(--eh-panel-2); }
+.moodle-dialogue-exception .param-stacktrace pre, .moodle-dialogue-exception .param-stacktrace .stacktrace-call { color: var(--eh-text); background-color: var(--eh-panel); }
+.file-picker .ygtvfocus, .filemanager .ygtvfocus { color: #fff; background-color: var(--eh-panel-2); }
+.fp-viewbar:not(.disabled) a.checked { color: var(--eh-cyan); }
+#page-backup-restore .filealiasesfailures .aliaseslist { color: var(--eh-text); background-color: var(--eh-panel); }
+.path-backup .wibbler .state0 { background: var(--eh-panel-2); }
+
+/* Messages */
+.message-app .message.send .time { color: rgba(255, 255, 255, .85); }
+.message-app .day { color: var(--eh-muted); }
+
+/* Quiz: navigation block, question bank header, timer (the red warning states keep Boost's dark text) */
+.path-mod-quiz #mod_quiz_navblock span.qnbutton { color: var(--eh-text); }
+#page-mod-quiz-edit .questionbankwindow div.header, #page-mod-quiz-edit .questionbankwindow div.header .title { color: #fff; background: var(--eh-panel-2); }
+#quiz-timer-wrapper #quiz-timer { color: #fff; background-color: var(--eh-panel-2); border: 1px solid var(--eh-line); }
+
+/* Feedback editor items */
+.path-mod-feedback #feedback_edit_form [id*=_feedback_item_].feedback_itemlist { color: var(--eh-text); background-color: var(--eh-panel); }
+.path-mod-feedback #feedback_edit_form [id*=_feedback_item_].feedback_itemlist.sortable-list-current-position,
+.path-mod-feedback #feedback_edit_form .feedback_itemlist.sortable-list-is-dragged.sortable-list-current-position { background-color: var(--eh-panel-2); }
